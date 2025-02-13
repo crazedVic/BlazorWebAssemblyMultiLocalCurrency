@@ -31,13 +31,17 @@
 </div>
 
 @code {
-    private CultureInfo[] supportedCultures = new[]
+    private static readonly Dictionary<string, string> languageToCountry = new()
     {
-        new CultureInfo("en-US"),
-        new CultureInfo("es-ES"),
-        new CultureInfo("fr-FR"),
-        new CultureInfo("de-DE")
+        ["en"] = "US",
+        ["es"] = "ES",
+        ["fr"] = "FR",
+        ["de"] = "DE"
     };
+
+    private CultureInfo[] supportedCultures => LocalizationService.AvailableLanguages
+        .Select(l => new CultureInfo($"{l.Code}-{languageToCountry[l.Code]}"))
+        .ToArray();
 
     private string Culture
     {
