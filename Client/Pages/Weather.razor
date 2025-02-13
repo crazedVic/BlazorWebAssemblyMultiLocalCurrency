@@ -20,9 +20,10 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>@Localizer["Date"]</th>
-                <th>@Localizer["Temperature C"]</th>
-                <th>@Localizer["Temperature F"]</th>
+                <th style="width: 40%">@Localizer["Date"]</th>
+                <th style="width: 120px; text-align: right">@Localizer["Temperature C"]</th>
+                <th style="width: 120px; text-align: right">@Localizer["Temperature F"]</th>
+                <th style="width: 24px"></th>
                 <th>@Localizer["Summary"]</th>
             </tr>
         </thead>
@@ -30,9 +31,10 @@ else
             @foreach (var forecast in forecasts)
             {
                 <tr>
-                    <td>@forecast.Date.ToShortDateString()</td>
-                    <td>@forecast.TemperatureC</td>
-                    <td>@forecast.TemperatureF</td>
+                    <td style="width: 40%">@forecast.Date.ToShortDateString()</td>
+                    <td style="width: 120px; @(forecast.TemperatureC < 0 ? "color: red" : ""); text-align: right">@forecast.TemperatureC°C</td>
+                    <td style="width: 120px; @(forecast.TemperatureF < 0 ? "color: red" : ""); text-align: right">@forecast.TemperatureF°F</td>
+                    <td style="width: 24px"></td>
                     <td>@Localizer[forecast.Summary ?? ""]</td>
                 </tr>
             }
@@ -72,6 +74,6 @@ else
         [JsonPropertyName("summary")]
         public string? Summary { get; set; }
 
-        public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+        public int TemperatureF => 32 + (int)(TemperatureC * 9 / 5);
     }
 }
