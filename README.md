@@ -203,6 +203,125 @@ Or through Visual Studio's Test Explorer.
 - Mock services are reusable across test cases
 - Common setup is handled in constructor or fixture classes
 
+### Server Project Test Coverage
+
+The Server project implements comprehensive API endpoint tests using xUnit as the testing framework. The tests ensure the reliability and correctness of the REST API endpoints.
+
+#### Test Organization
+
+Tests are organized by controller in separate files:
+- `CurrencyControllerTests.cs`: Tests for currency-related endpoints
+- `ProductsControllerTests.cs`: Tests for product management endpoints
+- `CategoriesControllerTests.cs`: Tests for category management endpoints
+
+#### Testing Approach
+
+1. **Controller Testing**
+   - HTTP response validation
+   - Response type verification
+   - Status code checking
+   - Response content validation
+   - Error handling
+
+2. **Service Integration**
+   - Mock-based testing using Moq
+   - Service dependency injection
+   - Exception handling and 500 errors
+   - Async operations
+
+3. **Input Validation**
+   - Query parameter validation
+   - Invalid input handling
+   - Empty/null parameter handling
+   - Edge cases (e.g., large numbers, special characters)
+
+4. **Response Schema**
+   - Consistent response formats
+   - Proper model serialization
+   - Null handling in responses
+   - Collection handling
+
+#### Key Testing Patterns
+
+1. **Controller Test Setup**
+   ```csharp
+   public class CurrencyControllerTests
+   {
+       private readonly Mock<ICurrencyService> _mockService;
+       private readonly CurrencyController _controller;
+
+       public CurrencyControllerTests()
+       {
+           _mockService = new Mock<ICurrencyService>();
+           _controller = new CurrencyController(_mockService.Object);
+       }
+   }
+   ```
+
+2. **Response Testing**
+   ```csharp
+   // Assert HTTP result type
+   var okResult = Assert.IsType<OkObjectResult>(result.Result);
+   
+   // Assert response content
+   var returnedData = Assert.IsType<ExpectedType>(okResult.Value);
+   Assert.Equal(expectedValue, returnedData.Property);
+   ```
+
+3. **Error Handling Tests**
+   ```csharp
+   [Fact]
+   public async Task Endpoint_WhenServiceThrowsException_Returns500Error()
+   {
+       // Arrange
+       _mockService.Setup(s => s.Method())
+           .ThrowsAsync(new Exception("Service error"));
+
+       // Act & Assert
+       var result = await _controller.Method();
+       var statusResult = Assert.IsType<ObjectResult>(result.Result);
+       Assert.Equal(500, statusResult.StatusCode);
+   }
+   ```
+
+#### Test Coverage Areas
+
+1. **Currency Controller**
+   - Available currencies retrieval
+   - Price conversion between currencies
+   - Price formatting with currency symbols
+   - Error handling for invalid currencies
+   - Input validation
+
+2. **Products Controller**
+   - Product list retrieval
+   - Product translation handling
+   - Empty result handling
+   - Error scenarios
+
+3. **Categories Controller**
+   - Category list retrieval
+   - Category translation handling
+   - Empty result handling
+   - Error scenarios
+
+#### Running Tests
+
+Tests can be run using the .NET CLI:
+```bash
+dotnet test Server.Tests/Server.Tests.csproj
+```
+
+Or through Visual Studio's Test Explorer.
+
+#### Test Maintenance
+
+- Tests focus on API contract validation
+- Each endpoint has its own test class
+- Mock services are reused within test classes
+- Error handling is consistently tested across all endpoints
+- Response schemas are verified for backward compatibility
+
 ## Contributing
 
 Feel free to submit issues and enhancement requests.
