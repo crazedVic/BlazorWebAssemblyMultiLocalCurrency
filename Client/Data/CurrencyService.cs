@@ -5,7 +5,7 @@ using BlazorHelloWorld.Shared.Models;
 using BlazorHelloWorld.Shared.Services;
 using Microsoft.JSInterop;
 
-namespace BlazorHelloWorld.Data;
+namespace BlazorHelloWorld.Client.Data;
 
 public class CurrencyService : ICurrencyService
 {

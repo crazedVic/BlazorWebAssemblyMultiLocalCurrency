@@ -4,7 +4,7 @@ using System.Linq;
 using BlazorHelloWorld.Shared.Models;
 using BlazorHelloWorld.Shared.Services;
 
-namespace BlazorHelloWorld.Data;
+namespace BlazorHelloWorld.Client.Data;
 
 public class ProductService : IProductService
 {

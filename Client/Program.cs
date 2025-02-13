@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorHelloWorld;
-using BlazorHelloWorld.Data;
+using BlazorHelloWorld.Client.Data;
 using BlazorHelloWorld.Shared.Services;
 using BlazorHelloWorld.Shared.Models;
 using System.Globalization;
