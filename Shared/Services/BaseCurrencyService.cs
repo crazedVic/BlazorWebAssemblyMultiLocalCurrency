@@ -54,9 +54,9 @@ public abstract class BaseCurrencyService : ICurrencyService
     {
         if (!Currencies.TryGetValue(currency, out var currencyInfo))
         {
-            return Task.FromResult(price.ToString("N2", CultureInfo.InvariantCulture));
+            return Task.FromResult(price.ToString("N2", CultureInfo.CurrentCulture));
         }
 
-        return Task.FromResult($"{currencyInfo.Symbol}{price.ToString("N2", CultureInfo.InvariantCulture)}");
+        return Task.FromResult($"{currencyInfo.Symbol}{price.ToString("N2", CultureInfo.CurrentCulture)}");
     }
 } 
