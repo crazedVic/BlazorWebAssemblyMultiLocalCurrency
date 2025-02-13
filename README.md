@@ -90,6 +90,119 @@ The application follows a clean architecture pattern with:
 - Culture-aware formatting
 - Resource-based translations
 
+## Testing Implementation
+
+### Shared Project Test Coverage
+
+The Shared project implements comprehensive unit tests using xUnit as the testing framework. The tests follow a systematic approach to ensure code quality and reliability.
+
+#### Test Organization
+
+Tests are organized by model classes in separate files:
+- `ProductTests.cs`: Tests for the core Product model
+- `CurrencyInfoTests.cs`: Tests for currency-related functionality
+- `LocalizedProductTests.cs`: Tests for product localization
+- `ProductTranslationsTests.cs`: Tests for product translation collections
+- `CategoryTranslationsTests.cs`: Tests for category translation management
+
+#### Testing Approach
+
+1. **Model Testing**
+   - Default value initialization
+   - Property setters and getters
+   - Null handling and validation
+   - Edge cases and boundary values
+   - Copy behavior and object creation
+
+2. **Service Integration**
+   - Mock-based testing using Moq
+   - Service dependency injection
+   - Exception handling
+   - Async operations
+
+3. **Localization Testing**
+   - Multi-language support
+   - Currency formatting
+   - Translation management
+   - Cultural variants
+
+4. **Data Validation**
+   - Null and empty values
+   - Special characters
+   - Long string handling
+   - Numeric precision
+   - Currency exchange rates
+
+#### Key Testing Patterns
+
+1. **Arrange-Act-Assert Pattern**
+   ```csharp
+   // Arrange
+   var product = new Product(...);
+   
+   // Act
+   var result = product.GetLocalizedName("en");
+   
+   // Assert
+   Assert.Equal(expectedName, result);
+   ```
+
+2. **Theory-based Testing**
+   ```csharp
+   [Theory]
+   [InlineData("USD", "EUR", 100.00, 85.00)]
+   [InlineData("USD", "GBP", 100.00, 73.50)]
+   public async Task GetPriceInCurrency_ShouldHandleMultipleCurrencies(...)
+   ```
+
+3. **Mock-based Testing**
+   ```csharp
+   _currencyServiceMock.Setup(x => x.ConvertPrice(100.00m, "USD", "EUR"))
+       .ReturnsAsync(85.00m);
+   ```
+
+#### Test Coverage Areas
+
+1. **Product Class**
+   - Price conversion and formatting
+   - Localization of product details
+   - Category management
+   - Stock handling
+   - Service integration
+
+2. **CurrencyInfo Class**
+   - Exchange rate handling
+   - Currency code validation
+   - Symbol management
+   - Formatting rules
+
+3. **LocalizedProduct Class**
+   - Translation management
+   - Cultural variants
+   - Default fallbacks
+
+4. **Collections**
+   - Product translations
+   - Category translations
+   - List operations
+   - Dictionary management
+
+#### Running Tests
+
+Tests can be run using the .NET CLI:
+```bash
+dotnet test Shared.Tests/Shared.Tests.csproj
+```
+
+Or through Visual Studio's Test Explorer.
+
+#### Test Maintenance
+
+- Tests are designed to be maintainable and readable
+- Each test has a clear purpose and description
+- Mock services are reusable across test cases
+- Common setup is handled in constructor or fixture classes
+
 ## Contributing
 
 Feel free to submit issues and enhancement requests.
