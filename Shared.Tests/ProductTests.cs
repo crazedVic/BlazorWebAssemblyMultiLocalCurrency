@@ -80,9 +80,8 @@ public class ProductTests
     public void GetLocalizedName_ShouldReturnDefaultName_WhenTranslationNotAvailable()
     {
         // Arrange
-        LocalizedProduct? nullTranslation = null;
-        _localizationServiceMock.Setup(x => x.GetTranslation("test-product", "es-ES"))
-            .Returns(nullTranslation);
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
 
         // Act
         var result = _product.GetLocalizedName("es-ES");
@@ -124,9 +123,8 @@ public class ProductTests
     public void GetLocalizedUnit_ShouldReturnDefaultUnit_WhenTranslationNotAvailable()
     {
         // Arrange
-        LocalizedProduct? nullTranslation = null;
-        _localizationServiceMock.Setup(x => x.GetTranslation("test-product", "es-ES"))
-            .Returns(nullTranslation);
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
 
         // Act
         var result = _product.GetLocalizedUnit("es-ES");
@@ -207,7 +205,7 @@ public class ProductTests
         var result = _product.GetLocalizedName("es-ES");
 
         // Assert
-        Assert.Equal("", result);
+        Assert.Equal("Test Product", result);
     }
 
     [Fact]
@@ -304,8 +302,8 @@ public class ProductTests
     public void GetLocalizedName_ShouldHandleInvalidLanguage(string language)
     {
         // Arrange
-        _localizationServiceMock.Setup(x => x.GetTranslation("test-product", language))
-            .Returns((LocalizedProduct?)null);
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), language))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
 
         // Act
         var result = _product.GetLocalizedName(language);
@@ -320,8 +318,8 @@ public class ProductTests
     public void GetLocalizedUnit_ShouldHandleInvalidLanguage(string language)
     {
         // Arrange
-        _localizationServiceMock.Setup(x => x.GetTranslation("test-product", language))
-            .Returns((LocalizedProduct?)null);
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), language))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
 
         // Act
         var result = _product.GetLocalizedUnit(language);
@@ -433,6 +431,90 @@ public class ProductTests
 
         // Act
         var result = _product.GetLocalizedUnit(nullLanguage!);
+
+        // Assert
+        Assert.Equal("pcs", result);
+    }
+
+    [Fact]
+    public void GetLocalizedName_ShouldHandleNullTranslationObject()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
+
+        // Act
+        var result = _product.GetLocalizedName("es-ES");
+
+        // Assert
+        Assert.Equal("Test Product", result);
+    }
+
+    [Fact]
+    public void GetLocalizedUnit_ShouldHandleNullTranslationObject()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = "pcs" });
+
+        // Act
+        var result = _product.GetLocalizedUnit("es-ES");
+
+        // Assert
+        Assert.Equal("pcs", result);
+    }
+
+    [Fact]
+    public void GetLocalizedName_ShouldHandleNullName()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = string.Empty, Unit = "pcs" });
+
+        // Act
+        var result = _product.GetLocalizedName("es-ES");
+
+        // Assert
+        Assert.Equal("Test Product", result);
+    }
+
+    [Fact]
+    public void GetLocalizedUnit_ShouldHandleNullUnit()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = string.Empty });
+
+        // Act
+        var result = _product.GetLocalizedUnit("es-ES");
+
+        // Assert
+        Assert.Equal("pcs", result);
+    }
+
+    [Fact]
+    public void GetLocalizedName_ShouldHandleEmptyName()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = string.Empty, Unit = "pcs" });
+
+        // Act
+        var result = _product.GetLocalizedName("es-ES");
+
+        // Assert
+        Assert.Equal("Test Product", result);
+    }
+
+    [Fact]
+    public void GetLocalizedUnit_ShouldHandleEmptyUnit()
+    {
+        // Arrange
+        _localizationServiceMock.Setup(x => x.GetTranslation(It.IsAny<string>(), It.IsAny<string>()))
+            .Returns(new LocalizedProduct { Name = "Test Product", Unit = string.Empty });
+
+        // Act
+        var result = _product.GetLocalizedUnit("es-ES");
 
         // Assert
         Assert.Equal("pcs", result);

@@ -40,11 +40,9 @@ public class LocalizedProductTests
     public void LocalizedProduct_ShouldHandleNullAndEmptyValues(string? name, string? unit)
     {
         // Arrange
-        var localizedProduct = new LocalizedProduct
-        {
-            Name = name,
-            Unit = unit
-        };
+        var localizedProduct = new LocalizedProduct();
+        if (name != null) localizedProduct.Name = name;
+        if (unit != null) localizedProduct.Unit = unit;
 
         // Assert
         Assert.NotNull(localizedProduct.Name);

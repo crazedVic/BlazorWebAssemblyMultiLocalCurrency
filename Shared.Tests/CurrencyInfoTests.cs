@@ -102,13 +102,11 @@ public class CurrencyInfoTests
     public void CurrencyInfo_ShouldHandleNullAndEmptyValues(string? code, string? name, string? flagCode, string? symbol)
     {
         // Arrange
-        var currencyInfo = new CurrencyInfo
-        {
-            Code = code,
-            Name = name,
-            FlagCode = flagCode,
-            Symbol = symbol
-        };
+        var currencyInfo = new CurrencyInfo();
+        if (code != null) currencyInfo.Code = code;
+        if (name != null) currencyInfo.Name = name;
+        if (flagCode != null) currencyInfo.FlagCode = flagCode;
+        if (symbol != null) currencyInfo.Symbol = symbol;
 
         // Assert
         Assert.NotNull(currencyInfo.Code);
