@@ -21,6 +21,7 @@ builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
 builder.Services.AddScoped<BlazorHelloWorld.Shared.Models.ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddSingleton<CounterState>();
 
 // Configure supported cultures
 var supportedCultures = new[]
