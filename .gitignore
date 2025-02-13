@@ -1,8 +1,3 @@
-# Ignore Client, Server, and Shared folders
-Client/
-Server/
-Shared/
-
 # .NET Core build folders
 bin/
 obj/

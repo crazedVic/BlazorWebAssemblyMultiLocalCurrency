@@ -1,0 +1,9 @@
+﻿@page "/"
+@using Microsoft.Extensions.Localization
+@inject IStringLocalizer<App> Localizer
+
+<PageTitle>@Localizer["Home"]</PageTitle>
+
+<h1>@Localizer["Hello"]</h1>
+
+<p>@Localizer["Welcome"]</p>

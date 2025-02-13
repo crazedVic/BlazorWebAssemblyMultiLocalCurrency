@@ -1,0 +1,85 @@
+@using System.Globalization
+@using BlazorHelloWorld.Shared.Models
+@using MudBlazor
+@using Microsoft.Extensions.Localization
+@inject IJSRuntime JSRuntime
+@inject NavigationManager Nav
+@inject ILocalizationService LocalizationService
+@inject IStringLocalizer<App> Localizer
+@implements IAsyncDisposable
+
+<div class="d-flex align-items-center me-3">
+    <MudSelect T="string"
+               Label="@Localizer["Language"]"
+               Value="@Culture"
+               ValueChanged="@((string value) => Culture = value)"
+               Dense="true"
+               Style="min-width: 120px;"
+               Variant="Variant.Text"
+               disableUnderLine="true"
+               dropdownIcon="@Icons.Material.Filled.KeyboardArrowDown">
+        @foreach (var culture in supportedCultures)
+        {
+            <MudSelectItem T="string" Value="@culture.Name">
+                <div class="d-flex align-items-center">
+                    <span class="fi fi-@(culture.Name.Split('-')[1].ToLower()) me-2"></span>
+                    <span>@culture.Name</span>
+                </div>
+            </MudSelectItem>
+        }
+    </MudSelect>
+</div>
+
+@code {
+    private CultureInfo[] supportedCultures = new[]
+    {
+        new CultureInfo("en-US"),
+        new CultureInfo("es-ES"),
+        new CultureInfo("fr-FR")
+    };
+
+    private string Culture
+    {
+        get => CultureInfo.CurrentCulture.Name;
+        set
+        {
+            if (CultureInfo.CurrentCulture.Name != value)
+            {
+                var culture = new CultureInfo(value);
+                CultureInfo.CurrentCulture = culture;
+                CultureInfo.CurrentUICulture = culture;
+                
+                // Update LocalizationService with the new language
+                Task.Run(async () => await LocalizationService.SetLanguage(culture.TwoLetterISOLanguageName));
+                
+                JSRuntime.InvokeVoidAsync("blazorCulture.set", value);
+                Nav.NavigateTo(Nav.Uri, forceLoad: true);
+            }
+        }
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        var cultureName = await JSRuntime.InvokeAsync<string>("blazorCulture.get");
+        if (!string.IsNullOrEmpty(cultureName))
+        {
+            var culture = new CultureInfo(cultureName);
+            CultureInfo.CurrentCulture = culture;
+            CultureInfo.CurrentUICulture = culture;
+            // Set initial language in LocalizationService
+            await LocalizationService.SetLanguage(culture.TwoLetterISOLanguageName);
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (JSRuntime is IJSInProcessRuntime js)
+        {
+            try
+            {
+                await JSRuntime.InvokeVoidAsync("blazorCulture.set", CultureInfo.CurrentCulture.Name);
+            }
+            catch { }
+        }
+    }
+} 

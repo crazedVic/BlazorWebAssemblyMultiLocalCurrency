@@ -1,0 +1,56 @@
+@using BlazorHelloWorld.Shared.Models
+@using MudBlazor
+@inject ICurrencyService CurrencyService
+@implements IDisposable
+@using Microsoft.Extensions.Localization
+@inject ILocalizationService LocalizationService
+@inject IStringLocalizer<App> Localizer
+
+<div class="d-flex align-items-center me-3">
+    <MudSelect T="string" 
+               Label="@Localizer["Currency"]"
+               Value="@CurrencyService.CurrentCurrency"
+               ValueChanged="@OnCurrencyChanged"
+               Dense="true"
+               Style="min-width: 120px;">
+        @if (_currencies != null)
+        {
+            @foreach (var currency in _currencies)
+            {
+                <MudSelectItem T="string" Value="@currency.Code">
+                    <div class="d-flex align-items-center">
+                        <span class="fi fi-@currency.FlagCode me-2"></span>
+                        <span>@currency.Code</span>
+                    </div>
+                </MudSelectItem>
+            }
+        }
+    </MudSelect>
+</div>
+
+@code {
+    private List<CurrencyInfo>? _currencies;
+
+    private async Task OnCurrencyChanged(string newCurrency)
+    {
+        await CurrencyService.SetCurrentCurrency(newCurrency);
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        CurrencyService.CurrencyChanged += StateHasChanged;
+        await LoadCurrencies();
+    }
+
+    private async Task LoadCurrencies()
+    {
+        _currencies = await CurrencyService.GetAvailableCurrencies();
+        StateHasChanged();
+    }
+
+    public void Dispose()
+    {
+        CurrencyService.CurrencyChanged -= StateHasChanged;
+    }
+} 

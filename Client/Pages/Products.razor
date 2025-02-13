@@ -1,0 +1,139 @@
+@page "/products"
+@using BlazorHelloWorld.Shared.Models
+@using Microsoft.Extensions.Localization
+@inject IProductService ProductService
+@inject ICurrencyService CurrencyService
+@inject ILocalizationService LocalizationService
+@inject ICategoryService CategoryService
+@inject IStringLocalizer<App> Localizer
+@implements IDisposable
+
+<PageTitle>@Localizer["Products"]</PageTitle>
+
+<h1>@Localizer["Products"]</h1>
+
+<div class="table-responsive">
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>@Localizer["Name"]</th>
+                <th>@Localizer["Category"]</th>
+                <th>@Localizer["Price"] (List)</th>
+                <th>@Localizer["Price"] (Local)</th>
+                <th>@Localizer["Stock"]</th>
+                <th>@Localizer["Unit"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in _products)
+            {
+                <tr>
+                    <td>@product.Id</td>
+                    <td>@(product.Translations.GetValueOrDefault(LocalizationService.CurrentLanguage)?.Name ?? product.Translations.GetValueOrDefault("en")?.Name ?? string.Empty)</td>
+                    <td>
+                        @if (_categoryTranslations.TryGetValue(product.Id, out var category))
+                        {
+                            @category
+                        }
+                        else
+                        {
+                            <span>Loading...</span>
+                        }
+                    </td>
+                    <td>
+                        @if (_listPrices.TryGetValue(product.Id, out var listPrice))
+                        {
+                            @listPrice
+                        }
+                        else
+                        {
+                            <span>Loading...</span>
+                        }
+                    </td>
+                    <td>
+                        @if (_localPrices.TryGetValue(product.Id, out var localPrice))
+                        {
+                            @localPrice
+                        }
+                        else
+                        {
+                            <span>Loading...</span>
+                        }
+                    </td>
+                    <td>@product.StockQuantity</td>
+                    <td>@(product.Translations.GetValueOrDefault(LocalizationService.CurrentLanguage)?.Unit ?? product.Translations.GetValueOrDefault("en")?.Unit ?? string.Empty)</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+@code {
+    private List<ProductTranslationItem> _products = new();
+    private Dictionary<string, string> _categoryTranslations = new();
+    private Dictionary<string, string> _listPrices = new();
+    private Dictionary<string, string> _localPrices = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        var translations = await ProductService.GetProducts();
+        _products = translations.Products;
+        LocalizationService.LanguageChanged += OnLanguageChanged;
+        CurrencyService.CurrencyChanged += OnCurrencyChanged;
+        await LoadCategoryTranslations();
+        await LoadPrices();
+    }
+
+    public void Dispose()
+    {
+        LocalizationService.LanguageChanged -= OnLanguageChanged;
+        CurrencyService.CurrencyChanged -= OnCurrencyChanged;
+    }
+
+    private async Task LoadPrices()
+    {
+        _listPrices.Clear();
+        _localPrices.Clear();
+        foreach (var product in _products)
+        {
+            _listPrices[product.Id] = await GetListPrice(product);
+            _localPrices[product.Id] = await GetLocalPrice(product);
+            StateHasChanged();
+        }
+    }
+
+    private async Task<string> GetLocalPrice(ProductTranslationItem product)
+    {
+        var convertedPrice = await CurrencyService.ConvertPrice(product.Price, product.BaseCurrency, CurrencyService.CurrentCurrency);
+        return await CurrencyService.FormatPrice(convertedPrice, CurrencyService.CurrentCurrency);
+    }
+
+    private async Task<string> GetListPrice(ProductTranslationItem product)
+    {
+        return await CurrencyService.FormatPrice(product.Price, product.BaseCurrency);
+    }
+
+    private async Task LoadCategoryTranslations()
+    {
+        _categoryTranslations.Clear();
+        foreach (var product in _products)
+        {
+            var category = await CategoryService.GetCategoryTranslation(product.Category, LocalizationService.CurrentLanguage);
+            _categoryTranslations[product.Id] = category;
+            StateHasChanged();
+        }
+    }
+
+    private async void OnLanguageChanged()
+    {
+        await LoadCategoryTranslations();
+        StateHasChanged();
+    }
+
+    private async void OnCurrencyChanged()
+    {
+        await LoadPrices();
+        StateHasChanged();
+    }
+} 

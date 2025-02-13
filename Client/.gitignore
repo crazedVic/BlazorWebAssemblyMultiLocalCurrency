@@ -1,0 +1,78 @@
+## .NET Core / Blazor specific
+bin/
+obj/
+*.dll
+*.pdb
+*.user
+*.userosscache
+*.sln.docstates
+*.cache
+
+## Visual Studio / VS Code
+.vs/
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+.history/
+
+## Blazor WebAssembly
+**/wwwroot/service-worker.js
+**/wwwroot/service-worker.published.js
+**/wwwroot/appsettings.Development.json
+
+## Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+[Ww][Ii][Nn]32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+bld/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+## macOS specific
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+## IDE - JetBrains Rider
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+## NuGet
+*.nuget.props
+*.nuget.targets
+packages/
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+
+## User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+## Misc
+*.log
+*.tmp
+*.temp 

@@ -1,0 +1,416 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "category": "dairy",
+      "price": 3.99,
+      "baseCurrency": "USD",
+      "stockQuantity": 50,
+      "translations": {
+        "en": {
+          "name": "Milk",
+          "unit": "liters"
+        },
+        "fr": {
+          "name": "Lait",
+          "unit": "litres"
+        },
+        "es": {
+          "name": "Leche",
+          "unit": "litros"
+        }
+      }
+    },
+    {
+      "id": 2,
+      "category": "bakery",
+      "price": 2.10,
+      "baseCurrency": "EUR",
+      "stockQuantity": 30,
+      "translations": {
+        "en": {
+          "name": "Bread",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Pain",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Pan",
+          "unit": "piezas"
+        }
+      }
+    },
+    {
+      "id": 3,
+      "category": "dairy",
+      "price": 3.50,
+      "baseCurrency": "GBP",
+      "stockQuantity": 100,
+      "translations": {
+        "en": {
+          "name": "Eggs",
+          "unit": "dozen"
+        },
+        "fr": {
+          "name": "Oeufs",
+          "unit": "douzaine"
+        },
+        "es": {
+          "name": "Huevos",
+          "unit": "docena"
+        }
+      }
+    },
+    {
+      "id": 4,
+      "category": "produce",
+      "price": 1.25,
+      "baseCurrency": "CAD",
+      "stockQuantity": 150,
+      "translations": {
+        "en": {
+          "name": "Bananas",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Bananes",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Plátanos",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 5,
+      "category": "meat",
+      "price": 12.99,
+      "baseCurrency": "AUD",
+      "stockQuantity": 25,
+      "translations": {
+        "en": {
+          "name": "Chicken Breast",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Poitrine de Poulet",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Pechuga de Pollo",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 6,
+      "category": "grains",
+      "price": 5.99,
+      "baseCurrency": "USD",
+      "stockQuantity": 40,
+      "translations": {
+        "en": {
+          "name": "Rice",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Riz",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Arroz",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 7,
+      "category": "produce",
+      "price": 2.75,
+      "baseCurrency": "EUR",
+      "stockQuantity": 75,
+      "translations": {
+        "en": {
+          "name": "Tomatoes",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Tomates",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Tomates",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 8,
+      "category": "dairy",
+      "price": 5.50,
+      "baseCurrency": "GBP",
+      "stockQuantity": 45,
+      "translations": {
+        "en": {
+          "name": "Cheese",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Fromage",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Queso",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 9,
+      "category": "grains",
+      "price": 2.50,
+      "baseCurrency": "CAD",
+      "stockQuantity": 60,
+      "translations": {
+        "en": {
+          "name": "Pasta",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Pâtes",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Pasta",
+          "unit": "piezas"
+        }
+      }
+    },
+    {
+      "id": 10,
+      "category": "beverages",
+      "price": 6.99,
+      "baseCurrency": "AUD",
+      "stockQuantity": 35,
+      "translations": {
+        "en": {
+          "name": "Orange Juice",
+          "unit": "liters"
+        },
+        "fr": {
+          "name": "Jus d'Orange",
+          "unit": "litres"
+        },
+        "es": {
+          "name": "Jugo de Naranja",
+          "unit": "litros"
+        }
+      }
+    },
+    {
+      "id": 11,
+      "category": "produce",
+      "price": 1.49,
+      "baseCurrency": "USD",
+      "stockQuantity": 80,
+      "translations": {
+        "en": {
+          "name": "Carrots",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 12,
+      "category": "meat",
+      "price": 7.25,
+      "baseCurrency": "EUR",
+      "stockQuantity": 30,
+      "translations": {
+        "en": {
+          "name": "Ground Beef",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Boeuf Haché",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Carne Molida",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 13,
+      "category": "dairy",
+      "price": 2.75,
+      "baseCurrency": "GBP",
+      "stockQuantity": 55,
+      "translations": {
+        "en": {
+          "name": "Yogurt",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Yaourt",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Yogur",
+          "unit": "piezas"
+        }
+      }
+    },
+    {
+      "id": 14,
+      "category": "produce",
+      "price": 3.99,
+      "baseCurrency": "CAD",
+      "stockQuantity": 120,
+      "translations": {
+        "en": {
+          "name": "Apples",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Pommes",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Manzanas",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 15,
+      "category": "beverages",
+      "price": 15.50,
+      "baseCurrency": "AUD",
+      "stockQuantity": 25,
+      "translations": {
+        "en": {
+          "name": "Coffee",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Café",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Café",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 16,
+      "category": "breakfast",
+      "price": 4.99,
+      "baseCurrency": "USD",
+      "stockQuantity": 40,
+      "translations": {
+        "en": {
+          "name": "Cereal",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Céréales",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Cereal",
+          "unit": "piezas"
+        }
+      }
+    },
+    {
+      "id": 17,
+      "category": "seafood",
+      "price": 11.50,
+      "baseCurrency": "EUR",
+      "stockQuantity": 20,
+      "translations": {
+        "en": {
+          "name": "Salmon",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Saumon",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Salmón",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 18,
+      "category": "snacks",
+      "price": 2.99,
+      "baseCurrency": "GBP",
+      "stockQuantity": 65,
+      "translations": {
+        "en": {
+          "name": "Potato Chips",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Chips",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Papas Fritas",
+          "unit": "piezas"
+        }
+      }
+    },
+    {
+      "id": 19,
+      "category": "produce",
+      "price": 1.75,
+      "baseCurrency": "CAD",
+      "stockQuantity": 90,
+      "translations": {
+        "en": {
+          "name": "Onions",
+          "unit": "kg"
+        },
+        "fr": {
+          "name": "Oignons",
+          "unit": "kg"
+        },
+        "es": {
+          "name": "Cebollas",
+          "unit": "kg"
+        }
+      }
+    },
+    {
+      "id": 20,
+      "category": "frozen",
+      "price": 8.99,
+      "baseCurrency": "AUD",
+      "stockQuantity": 30,
+      "translations": {
+        "en": {
+          "name": "Ice Cream",
+          "unit": "pieces"
+        },
+        "fr": {
+          "name": "Crème Glacée",
+          "unit": "pièces"
+        },
+        "es": {
+          "name": "Helado",
+          "unit": "piezas"
+        }
+      }
+    }
+  ]
+} 

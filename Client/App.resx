@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+    </xsd:element>
+  </xsd:schema>
+  <data name="Welcome" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Stock" xml:space="preserve">
+    <value>Stock</value>
+  </data>
+  <data name="Unit" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="About" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="Counter" xml:space="preserve">
+    <value>Counter</value>
+  </data>
+  <data name="Weather" xml:space="preserve">
+    <value>Weather</value>
+  </data>
+  <data name="Hello World" xml:space="preserve">
+    <value>Hello World</value>
+  </data>
+  <data name="Navigation menu" xml:space="preserve">
+    <value>Navigation menu</value>
+  </data>
+  <data name="Currency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+</root> 
