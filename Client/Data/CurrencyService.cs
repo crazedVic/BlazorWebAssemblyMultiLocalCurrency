@@ -2,12 +2,14 @@ using System.Collections.Concurrent;
 using System.Net.Http.Json;
 using System.Globalization;
 using BlazorHelloWorld.Shared.Models;
+using Microsoft.JSInterop;
 
 namespace BlazorHelloWorld.Client.Data;
 
 public class CurrencyService : ICurrencyService
 {
     private readonly HttpClient _httpClient;
+    private readonly IJSRuntime _jsRuntime;
     private string _currentCurrency = "USD";
     private Dictionary<string, CurrencyInfo> _currencies = new();
     
@@ -20,9 +22,20 @@ public class CurrencyService : ICurrencyService
         public string FormattedPrice { get; set; } = string.Empty;
     }
 
-    public CurrencyService(HttpClient httpClient)
+    public CurrencyService(HttpClient httpClient, IJSRuntime jsRuntime)
     {
         _httpClient = httpClient;
+        _jsRuntime = jsRuntime;
+        InitializeCurrency();
+    }
+
+    private async void InitializeCurrency()
+    {
+        var savedCurrency = await _jsRuntime.InvokeAsync<string>("blazorCurrency.get");
+        if (!string.IsNullOrEmpty(savedCurrency))
+        {
+            _currentCurrency = savedCurrency;
+        }
     }
 
     public async Task<List<CurrencyInfo>> GetAvailableCurrencies()
@@ -40,9 +53,9 @@ public class CurrencyService : ICurrencyService
         if (_currentCurrency != currency)
         {
             _currentCurrency = currency;
+            await _jsRuntime.InvokeVoidAsync("blazorCurrency.set", currency);
             CurrencyChanged?.Invoke();
         }
-        await Task.CompletedTask;
     }
 
     public Task<decimal> ConvertPrice(decimal price, string fromCurrency, string toCurrency)
