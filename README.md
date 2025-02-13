@@ -55,10 +55,18 @@ This entire solution was architected and implemented by Claude 3.5 Sonnet LLM us
 1. Ensure you have the .NET 9 Preview SDK installed
 2. Clone the repository
 3. Navigate to the project directory
-4. Run the application:
+4. Run both the Server and Client projects:
+
+   In terminal 1 (Server):
    ```bash
    dotnet run --project Server
    ```
+
+   In terminal 2 (Client):
+   ```bash
+   dotnet run --project Client
+   ```
+5. Open your browser and navigate to the Client URL (typically https://localhost:5001)
 
 ## Architecture
 
