@@ -76,16 +76,16 @@
   <data name="Weather data demo" xml:space="preserve">
     <value>Diese Komponente demonstriert das Abrufen von Daten vom Server.</value>
   </data>
-  <data name="Weather_Freezing" xml:space="preserve">
+  <data name="Freezing" xml:space="preserve">
     <value>Gefrierend</value>
   </data>
-  <data name="Weather_Bracing" xml:space="preserve">
+  <data name="Bracing" xml:space="preserve">
     <value>Erfrischend</value>
   </data>
-  <data name="Weather_Balmy" xml:space="preserve">
+  <data name="Balmy" xml:space="preserve">
     <value>Mild</value>
   </data>
-  <data name="Weather_Chilly" xml:space="preserve">
+  <data name="Chilly" xml:space="preserve">
     <value>Kühl</value>
   </data>
 </root> 
