@@ -23,6 +23,19 @@ This entire solution was architected and implemented by Claude 3.5 Sonnet LLM us
 - **Entity Framework Core** for data access
 - **RESTful API** architecture
 
+## Third-Party Libraries & Frameworks
+
+### UI Components & Styling
+- **MudBlazor (v8.2.0)**: Material Design component library for Blazor
+- **Bootstrap**: Frontend CSS framework for responsive design
+- **Flag Icons (v6.11.0)**: CSS library for country flag icons
+- **Google Fonts**: Roboto font family for consistent typography
+
+### Core Dependencies
+- **Microsoft.AspNetCore.Components.WebAssembly (v9.0.0-preview.1.24081.5)**: Core Blazor WebAssembly framework
+- **Microsoft.Extensions.Localization (v9.0.1)**: Localization support for multi-language features
+- **Microsoft.AspNetCore.OpenApi (v9.0.0)**: OpenAPI (Swagger) support for API documentation
+
 ## Project Structure
 
 - **Client**: Blazor WebAssembly frontend application
