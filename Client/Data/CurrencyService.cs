@@ -45,11 +45,11 @@ public class CurrencyService : ICurrencyService
         await Task.CompletedTask;
     }
 
-    public async Task<decimal> ConvertPrice(decimal price, string fromCurrency, string toCurrency)
+    public Task<decimal> ConvertPrice(decimal price, string fromCurrency, string toCurrency)
     {
         if (!_currencies.ContainsKey(fromCurrency) || !_currencies.ContainsKey(toCurrency))
         {
-            return price;
+            return Task.FromResult(price);
         }
 
         var fromRate = _currencies[fromCurrency].ExchangeRate;
@@ -59,19 +59,19 @@ public class CurrencyService : ICurrencyService
         var usdAmount = price / fromRate;
         var convertedAmount = usdAmount * toRate;
 
-        return Math.Round(convertedAmount, 2);
+        return Task.FromResult(Math.Round(convertedAmount, 2));
     }
 
-    public async Task<string> FormatPrice(decimal price, string currency)
+    public Task<string> FormatPrice(decimal price, string currency)
     {
         if (!_currencies.TryGetValue(currency, out var currencyInfo))
         {
-            return price.ToString("N2", CultureInfo.InvariantCulture);
+            return Task.FromResult(price.ToString("N2", CultureInfo.InvariantCulture));
         }
 
         // Format with the currency symbol in the appropriate position
         // Most currencies show symbol before the amount (like $10.00)
         // Some currencies might need symbol after, but for simplicity we'll put all before for now
-        return $"{currencyInfo.Symbol}{price.ToString("N2", CultureInfo.InvariantCulture)}";
+        return Task.FromResult($"{currencyInfo.Symbol}{price.ToString("N2", CultureInfo.InvariantCulture)}");
     }
 } 
