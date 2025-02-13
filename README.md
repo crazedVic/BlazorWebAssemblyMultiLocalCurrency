@@ -103,27 +103,32 @@ The application follows a clean architecture pattern with:
 
 ## Testing Implementation
 
-### Shared Project Test Coverage
+The solution implements comprehensive testing using xUnit as the testing framework across both Server and Shared projects. Tests follow a systematic approach to ensure code quality and reliability.
 
-The Shared project implements comprehensive unit tests using xUnit as the testing framework. The tests follow a systematic approach to ensure code quality and reliability.
+### Test Organization
 
-#### Test Organization
+Tests are organized by project and responsibility:
 
-Tests are organized by model classes in separate files:
-- `ProductTests.cs`: Tests for the core Product model
-- `CurrencyInfoTests.cs`: Tests for currency-related functionality
-- `LocalizedProductTests.cs`: Tests for product localization
-- `ProductTranslationsTests.cs`: Tests for product translation collections
-- `CategoryTranslationsTests.cs`: Tests for category translation management
+#### Shared.Tests
+- `ProductTests.cs`: Core Product model validation
+- `LocalizedProductTests.cs`: Product localization features
+- `CurrencyInfoTests.cs`: Currency handling and conversion
+- `ProductTranslationsTests.cs`: Translation collection management
+- `CategoryTranslationsTests.cs`: Category translation management
 
-#### Testing Approach
+#### Server.Tests
+- `CurrencyControllerTests.cs`: Currency API endpoints
+- `ProductsControllerTests.cs`: Product management endpoints
+- `CategoriesControllerTests.cs`: Category management endpoints
 
-1. **Model Testing**
-   - Default value initialization
-   - Property setters and getters
-   - Null handling and validation
-   - Edge cases and boundary values
-   - Copy behavior and object creation
+### Testing Approach
+
+1. **Model & API Testing**
+   - Property validation and object behavior
+   - HTTP response validation
+   - Status code verification
+   - Response content validation
+   - Error handling scenarios
 
 2. **Service Integration**
    - Mock-based testing using Moq
@@ -131,20 +136,14 @@ Tests are organized by model classes in separate files:
    - Exception handling
    - Async operations
 
-3. **Localization Testing**
-   - Multi-language support
-   - Currency formatting
-   - Translation management
-   - Cultural variants
-
-4. **Data Validation**
+3. **Data Validation**
    - Null and empty values
    - Special characters
-   - Long string handling
+   - Edge cases
    - Numeric precision
-   - Currency exchange rates
+   - Currency handling
 
-#### Key Testing Patterns
+### Key Testing Patterns
 
 1. **Arrange-Act-Assert Pattern**
    ```csharp
@@ -166,172 +165,40 @@ Tests are organized by model classes in separate files:
    public async Task GetPriceInCurrency_ShouldHandleMultipleCurrencies(...)
    ```
 
-3. **Mock-based Testing**
+3. **Controller Testing**
    ```csharp
-   _currencyServiceMock.Setup(x => x.ConvertPrice(100.00m, "USD", "EUR"))
-       .ReturnsAsync(85.00m);
+   // Arrange
+   _mockService.Setup(s => s.Method())
+       .ThrowsAsync(new Exception("Service error"));
+
+   // Act & Assert
+   var result = await _controller.Method();
+   var statusResult = Assert.IsType<ObjectResult>(result.Result);
+   Assert.Equal(500, statusResult.StatusCode);
    ```
 
-#### Test Coverage Areas
+### Running Tests
 
-1. **Product Class**
-   - Price conversion and formatting
-   - Localization of product details
-   - Category management
-   - Stock handling
-   - Service integration
+Tests can be run per project or for the entire solution:
 
-2. **CurrencyInfo Class**
-   - Exchange rate handling
-   - Currency code validation
-   - Symbol management
-   - Formatting rules
-
-3. **LocalizedProduct Class**
-   - Translation management
-   - Cultural variants
-   - Default fallbacks
-
-4. **Collections**
-   - Product translations
-   - Category translations
-   - List operations
-   - Dictionary management
-
-#### Running Tests
-
-Tests can be run using the .NET CLI:
 ```bash
+# Run all tests
+dotnet test
+
+# Run specific project tests
 dotnet test Shared.Tests/Shared.Tests.csproj
+dotnet test Server.Tests/Server.Tests.csproj
 ```
 
-Or through Visual Studio's Test Explorer.
+Or use Visual Studio's Test Explorer for a graphical interface.
 
-#### Test Maintenance
+### Test Maintenance
 
 - Tests are designed to be maintainable and readable
 - Each test has a clear purpose and description
 - Mock services are reusable across test cases
 - Common setup is handled in constructor or fixture classes
-
-### Server Project Test Coverage
-
-The Server project implements comprehensive API endpoint tests using xUnit as the testing framework. The tests ensure the reliability and correctness of the REST API endpoints.
-
-#### Test Organization
-
-Tests are organized by controller in separate files:
-- `CurrencyControllerTests.cs`: Tests for currency-related endpoints
-- `ProductsControllerTests.cs`: Tests for product management endpoints
-- `CategoriesControllerTests.cs`: Tests for category management endpoints
-
-#### Testing Approach
-
-1. **Controller Testing**
-   - HTTP response validation
-   - Response type verification
-   - Status code checking
-   - Response content validation
-   - Error handling
-
-2. **Service Integration**
-   - Mock-based testing using Moq
-   - Service dependency injection
-   - Exception handling and 500 errors
-   - Async operations
-
-3. **Input Validation**
-   - Query parameter validation
-   - Invalid input handling
-   - Empty/null parameter handling
-   - Edge cases (e.g., large numbers, special characters)
-
-4. **Response Schema**
-   - Consistent response formats
-   - Proper model serialization
-   - Null handling in responses
-   - Collection handling
-
-#### Key Testing Patterns
-
-1. **Controller Test Setup**
-   ```csharp
-   public class CurrencyControllerTests
-   {
-       private readonly Mock<ICurrencyService> _mockService;
-       private readonly CurrencyController _controller;
-
-       public CurrencyControllerTests()
-       {
-           _mockService = new Mock<ICurrencyService>();
-           _controller = new CurrencyController(_mockService.Object);
-       }
-   }
-   ```
-
-2. **Response Testing**
-   ```csharp
-   // Assert HTTP result type
-   var okResult = Assert.IsType<OkObjectResult>(result.Result);
-   
-   // Assert response content
-   var returnedData = Assert.IsType<ExpectedType>(okResult.Value);
-   Assert.Equal(expectedValue, returnedData.Property);
-   ```
-
-3. **Error Handling Tests**
-   ```csharp
-   [Fact]
-   public async Task Endpoint_WhenServiceThrowsException_Returns500Error()
-   {
-       // Arrange
-       _mockService.Setup(s => s.Method())
-           .ThrowsAsync(new Exception("Service error"));
-
-       // Act & Assert
-       var result = await _controller.Method();
-       var statusResult = Assert.IsType<ObjectResult>(result.Result);
-       Assert.Equal(500, statusResult.StatusCode);
-   }
-   ```
-
-#### Test Coverage Areas
-
-1. **Currency Controller**
-   - Available currencies retrieval
-   - Price conversion between currencies
-   - Price formatting with currency symbols
-   - Error handling for invalid currencies
-   - Input validation
-
-2. **Products Controller**
-   - Product list retrieval
-   - Product translation handling
-   - Empty result handling
-   - Error scenarios
-
-3. **Categories Controller**
-   - Category list retrieval
-   - Category translation handling
-   - Empty result handling
-   - Error scenarios
-
-#### Running Tests
-
-Tests can be run using the .NET CLI:
-```bash
-dotnet test Server.Tests/Server.Tests.csproj
-```
-
-Or through Visual Studio's Test Explorer.
-
-#### Test Maintenance
-
-- Tests focus on API contract validation
-- Each endpoint has its own test class
-- Mock services are reused within test classes
-- Error handling is consistently tested across all endpoints
-- Response schemas are verified for backward compatibility
+- Focus on testing business logic and API contracts
 
 ## Contributing
 
