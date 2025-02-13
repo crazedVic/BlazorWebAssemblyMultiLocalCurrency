@@ -93,4 +93,106 @@ public class CurrencyInfoTests
         // Assert
         Assert.Equal("¥", currencyInfo.Symbol);
     }
+
+    [Theory]
+    [InlineData(null, null, null, null)]
+    [InlineData("", "", "", "")]
+    [InlineData(" ", " ", " ", " ")]
+    [InlineData("USD", null, "us", "$")]
+    public void CurrencyInfo_ShouldHandleNullAndEmptyValues(string? code, string? name, string? flagCode, string? symbol)
+    {
+        // Arrange
+        var currencyInfo = new CurrencyInfo
+        {
+            Code = code,
+            Name = name,
+            FlagCode = flagCode,
+            Symbol = symbol
+        };
+
+        // Assert
+        Assert.NotNull(currencyInfo.Code);
+        Assert.NotNull(currencyInfo.Name);
+        Assert.NotNull(currencyInfo.FlagCode);
+        Assert.NotNull(currencyInfo.Symbol);
+    }
+
+    [Fact]
+    public void CurrencyInfo_ShouldCreateCopy()
+    {
+        // Arrange
+        var original = new CurrencyInfo
+        {
+            Code = "USD",
+            Name = "US Dollar",
+            FlagCode = "us",
+            ExchangeRate = 1.0m,
+            Symbol = "$"
+        };
+
+        // Act
+        var copy = new CurrencyInfo
+        {
+            Code = original.Code,
+            Name = original.Name,
+            FlagCode = original.FlagCode,
+            ExchangeRate = original.ExchangeRate,
+            Symbol = original.Symbol
+        };
+
+        // Assert
+        Assert.Equal(original.Code, copy.Code);
+        Assert.Equal(original.Name, copy.Name);
+        Assert.Equal(original.FlagCode, copy.FlagCode);
+        Assert.Equal(original.ExchangeRate, copy.ExchangeRate);
+        Assert.Equal(original.Symbol, copy.Symbol);
+        Assert.NotSame(original, copy);
+    }
+
+    [Theory]
+    [InlineData(0.0001)]
+    [InlineData(1234567.8901)]
+    [InlineData(-0.0001)]
+    [InlineData(-1234567.8901)]
+    public void CurrencyInfo_ShouldHandleExchangeRatePrecision(double rate)
+    {
+        // Arrange & Act
+        var currencyInfo = new CurrencyInfo { ExchangeRate = (decimal)rate };
+
+        // Assert
+        Assert.Equal((decimal)rate, currencyInfo.ExchangeRate);
+    }
+
+    [Fact]
+    public void CurrencyInfo_ShouldHandleMaxValues()
+    {
+        // Arrange & Act
+        var currencyInfo = new CurrencyInfo { ExchangeRate = decimal.MaxValue };
+
+        // Assert
+        Assert.Equal(decimal.MaxValue, currencyInfo.ExchangeRate);
+    }
+
+    [Fact]
+    public void CurrencyInfo_ShouldHandleMinValues()
+    {
+        // Arrange & Act
+        var currencyInfo = new CurrencyInfo { ExchangeRate = decimal.MinValue };
+
+        // Assert
+        Assert.Equal(decimal.MinValue, currencyInfo.ExchangeRate);
+    }
+
+    [Fact]
+    public void CurrencyInfo_ShouldHandleLongStrings()
+    {
+        // Arrange
+        var longName = new string('a', 1000);
+
+        // Act
+        var currencyInfo = new CurrencyInfo { Name = longName };
+
+        // Assert
+        Assert.Equal(longName, currencyInfo.Name);
+    }
 } 
