@@ -1,6 +1,7 @@
 using Xunit;
 using Moq;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 namespace Shared.Tests;
 

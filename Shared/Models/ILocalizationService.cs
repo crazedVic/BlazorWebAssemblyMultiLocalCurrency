@@ -1,4 +1,7 @@
-namespace BlazorHelloWorld.Shared.Models;
+using System.Collections.Generic;
+using BlazorHelloWorld.Shared.Models;
+
+namespace BlazorHelloWorld.Shared.Services;
 
 public interface ILocalizationService
 {

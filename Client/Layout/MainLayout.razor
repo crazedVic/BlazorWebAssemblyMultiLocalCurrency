@@ -1,9 +1,11 @@
 ﻿@inherits LayoutComponentBase
 @using BlazorHelloWorld.Shared.Models
-@using BlazorHelloWorld.Shared
+@using BlazorHelloWorld.Shared.Services
 @using Microsoft.Extensions.Localization
+@using BlazorHelloWorld.Shared
 @inject ILocalizationService LocalizationService
 @inject IStringLocalizer<App> Localizer
+@inject NavigationManager NavigationManager
 
 <div class="page">
     <div class="sidebar">

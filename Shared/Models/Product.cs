@@ -1,3 +1,7 @@
+using System;
+using System.Threading.Tasks;
+using BlazorHelloWorld.Shared.Services;
+
 namespace BlazorHelloWorld.Shared.Models;
 
 public class Product

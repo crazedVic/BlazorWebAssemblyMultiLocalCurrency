@@ -2,9 +2,10 @@ using System.Collections.Concurrent;
 using System.Net.Http.Json;
 using System.Globalization;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 using Microsoft.JSInterop;
 
-namespace BlazorHelloWorld.Client.Data;
+namespace BlazorHelloWorld.Data;
 
 public class CurrencyService : ICurrencyService
 {

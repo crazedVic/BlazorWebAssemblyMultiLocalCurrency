@@ -2,6 +2,7 @@ using System.Text.Json;
 using System.Net.Http;
 using System.Net.Http.Json;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 namespace BlazorHelloWorld.Data;
 

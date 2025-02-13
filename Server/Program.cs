@@ -1,5 +1,6 @@
 using BlazorHelloWorld.Server.Services;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

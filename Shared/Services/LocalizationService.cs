@@ -1,6 +1,7 @@
+using System.Collections.Generic;
 using BlazorHelloWorld.Shared.Models;
 
-namespace BlazorHelloWorld.Server.Services;
+namespace BlazorHelloWorld.Shared.Services;
 
 public class LocalizationService : ILocalizationService
 {
@@ -8,18 +9,27 @@ public class LocalizationService : ILocalizationService
     {
         ["en"] = new Dictionary<string, LocalizedProduct>(),
         ["fr"] = new Dictionary<string, LocalizedProduct>(),
-        ["es"] = new Dictionary<string, LocalizedProduct>()
+        ["es"] = new Dictionary<string, LocalizedProduct>(),
+        ["de"] = new Dictionary<string, LocalizedProduct>()
     };
 
     public event Action? LanguageChanged;
     
     public string CurrentLanguage { get; private set; } = "en";
-
-    public Task SetLanguage(string language)
+    
+    public List<(string Code, string Name)> AvailableLanguages { get; } = new()
     {
-        if (CurrentLanguage != language && _translations.ContainsKey(language))
+        ("en", "English"),
+        ("fr", "Français"),
+        ("es", "Español"),
+        ("de", "Deutsch")
+    };
+
+    public Task SetLanguage(string languageCode)
+    {
+        if (CurrentLanguage != languageCode && _translations.ContainsKey(languageCode))
         {
-            CurrentLanguage = language;
+            CurrentLanguage = languageCode;
             LanguageChanged?.Invoke();
         }
         return Task.CompletedTask;

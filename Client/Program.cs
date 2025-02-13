@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using BlazorHelloWorld;
-using BlazorHelloWorld.Client.Data;
 using BlazorHelloWorld.Data;
+using BlazorHelloWorld.Shared.Services;
 using BlazorHelloWorld.Shared.Models;
 using System.Globalization;
 using Microsoft.JSInterop;
@@ -19,7 +19,7 @@ builder.Services.AddScoped(sp => new HttpClient
 // Register services
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddSingleton<ILocalizationService, LocalizationService>();
-builder.Services.AddScoped<BlazorHelloWorld.Shared.Models.ICurrencyService, CurrencyService>();
+builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddSingleton<CounterState>();
 
