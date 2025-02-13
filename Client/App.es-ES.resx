@@ -52,4 +52,28 @@
   <data name="Language" xml:space="preserve">
     <value>Idioma</value>
   </data>
+  <data name="Current count" xml:space="preserve">
+    <value>Contador actual</value>
+  </data>
+  <data name="Click me" xml:space="preserve">
+    <value>Haz clic aquí</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Cargando...</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Fecha</value>
+  </data>
+  <data name="Temperature C" xml:space="preserve">
+    <value>Temp. (C)</value>
+  </data>
+  <data name="Temperature F" xml:space="preserve">
+    <value>Temp. (F)</value>
+  </data>
+  <data name="Summary" xml:space="preserve">
+    <value>Resumen</value>
+  </data>
+  <data name="Weather data demo" xml:space="preserve">
+    <value>Este componente demuestra la obtención de datos desde el servidor.</value>
+  </data>
 </root> 
