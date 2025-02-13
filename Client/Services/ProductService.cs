@@ -4,13 +4,12 @@ using BlazorHelloWorld.Shared.Services;
 
 namespace BlazorHelloWorld.Client.Services;
 
-public class ProductService : IProductService
+public class ProductService : BaseProductService
 {
     private readonly HttpClient _httpClient;
     private readonly ILocalizationService _localizationService;
     private readonly ICurrencyService _currencyService;
     private readonly ICategoryService _categoryService;
-    private ProductTranslations? _productTranslations;
     
     public ProductService(
         HttpClient httpClient, 
@@ -24,26 +23,20 @@ public class ProductService : IProductService
         _categoryService = categoryService;
     }
 
-    private async Task EnsureProductsLoaded()
+    protected override async Task EnsureProductsLoaded()
     {
-        if (_productTranslations is not null) return;
+        if (ProductTranslations is not null) return;
 
-        _productTranslations = await _httpClient.GetFromJsonAsync<ProductTranslations>("/api/products")
+        ProductTranslations = await _httpClient.GetFromJsonAsync<ProductTranslations>("/api/products")
             ?? throw new InvalidOperationException("Failed to load products.json");
 
         // Add translations to the localization service
-        foreach (var p in _productTranslations.Products)
+        foreach (var p in ProductTranslations.Products)
         {
             foreach (var kvp in p.Translations)
             {
                 _localizationService.AddTranslation(p.Id, kvp.Key, kvp.Value);
             }
         }
-    }
-
-    public async Task<ProductTranslations> GetProducts()
-    {
-        await EnsureProductsLoaded();
-        return _productTranslations!;
     }
 } 

@@ -1,24 +1,26 @@
 using System.Text.Json;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 namespace BlazorHelloWorld.Server.Services;
 
-public class ProductService : IProductService
+public class ProductService : BaseProductService
 {
-    private readonly List<ProductTranslationItem> _products;
     private readonly string _dataPath;
 
     public ProductService(IWebHostEnvironment webHostEnvironment)
     {
         _dataPath = Path.Combine(webHostEnvironment.ContentRootPath, "Data", "products.json");
-        _products = LoadProducts();
     }
 
-    private List<ProductTranslationItem> LoadProducts()
+    protected override Task EnsureProductsLoaded()
     {
+        if (ProductTranslations is not null) return Task.CompletedTask;
+
         if (!File.Exists(_dataPath))
         {
-            return new List<ProductTranslationItem>();
+            ProductTranslations = new ProductTranslations { Products = new List<ProductTranslationItem>() };
+            return Task.CompletedTask;
         }
 
         try
@@ -66,17 +68,14 @@ public class ProductService : IProductService
                 }
             }
 
-            return products;
+            ProductTranslations = new ProductTranslations { Products = products };
+            return Task.CompletedTask;
         }
         catch (Exception ex)
         {
             Console.WriteLine($"Error loading products: {ex}");
-            return new List<ProductTranslationItem>();
+            ProductTranslations = new ProductTranslations { Products = new List<ProductTranslationItem>() };
+            return Task.CompletedTask;
         }
-    }
-
-    public Task<ProductTranslations> GetProducts()
-    {
-        return Task.FromResult(new ProductTranslations { Products = _products });
     }
 } 

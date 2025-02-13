@@ -1,6 +1,7 @@
 using BlazorHelloWorld.Server.Controllers;
 using BlazorHelloWorld.Server.Services;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 using Microsoft.AspNetCore.Mvc;
 using Moq;
 using Xunit;

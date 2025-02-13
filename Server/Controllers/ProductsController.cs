@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BlazorHelloWorld.Server.Services;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 namespace BlazorHelloWorld.Server.Controllers;
 
