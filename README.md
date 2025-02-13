@@ -5,7 +5,7 @@
 ### Currency Change Animation Demo
 Watch how prices smoothly animate when changing currencies:
 
-https://github.com/victorrub/cursor-blazor/raw/main/docs/record.mov
+https://user-images.githubusercontent.com/YOUR_GITHUB_USER_ID/cursor-blazor/main/docs/record.mov
 
 A modern e-commerce demonstration application built with [Blazor WebAssembly](https://learn.microsoft.com/en-us/aspnet/core/blazor/), showcasing various features and best practices in .NET development.
 
