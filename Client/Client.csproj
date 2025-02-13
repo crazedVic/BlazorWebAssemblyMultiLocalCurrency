@@ -31,6 +31,9 @@
     <EmbeddedResource Include="App.fr-FR.resx">
       <DependentUpon>App.resx</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="App.de-DE.resx">
+      <DependentUpon>App.resx</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -32,16 +32,27 @@ public class CategoryService : ICategoryService
 
     public Task<string> GetCategoryTranslation(string categoryId, string language)
     {
+        Console.WriteLine($"GetCategoryTranslation called with categoryId: {categoryId}, language: {language}");
+        
         var category = _categories.FirstOrDefault(c => c.Id.Equals(categoryId, StringComparison.OrdinalIgnoreCase));
         
         if (category == null)
+        {
+            Console.WriteLine($"Category not found for id: {categoryId}");
             return Task.FromResult(categoryId);
+        }
 
-        return Task.FromResult(
-            category.Translations.TryGetValue(language, out var translation)
-                ? translation
-                : category.Translations.GetValueOrDefault("en", categoryId)
-        );
+        var twoLetterCode = language.Split('-')[0].ToLower();
+        Console.WriteLine($"Trying with two-letter code: {twoLetterCode}");
+        
+        if (category.Translations.TryGetValue(twoLetterCode, out var translation))
+        {
+            Console.WriteLine($"Found translation for {twoLetterCode}: {translation}");
+            return Task.FromResult(translation);
+        }
+
+        Console.WriteLine($"No translation found for {twoLetterCode}, falling back to English");
+        return Task.FromResult(category.Translations.GetValueOrDefault("en", categoryId));
     }
 
     public Task<IEnumerable<string>> GetAllCategoryIds()

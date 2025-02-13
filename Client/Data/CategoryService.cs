@@ -36,9 +36,17 @@ public class CategoryService : ICategoryService
         if (category == null)
             return categoryId; // Fallback to ID if category not found
 
-        return category.Translations.TryGetValue(language, out var translation)
-            ? translation
-            : category.Translations.GetValueOrDefault("en", categoryId); // Fallback to English or ID
+        // Try full culture code first (e.g., "de-DE")
+        if (category.Translations.TryGetValue(language, out var translation))
+            return translation;
+
+        // Try two-letter language code (e.g., "de")
+        var twoLetterCode = language.Split('-')[0].ToLower();
+        if (category.Translations.TryGetValue(twoLetterCode, out translation))
+            return translation;
+
+        // Fallback to English or ID
+        return category.Translations.GetValueOrDefault("en", categoryId);
     }
 
     public async Task<IEnumerable<string>> GetAllCategoryIds()
@@ -50,9 +58,13 @@ public class CategoryService : ICategoryService
     public async Task<Dictionary<string, string>> GetAllCategoryTranslations(string language)
     {
         await EnsureCategoriesLoaded();
+        
+        var twoLetterCode = language.Split('-')[0].ToLower();
         return _categoryTranslations!.Categories.ToDictionary(
             c => c.Id,
-            c => c.Translations.GetValueOrDefault(language, c.Translations.GetValueOrDefault("en", c.Id))
+            c => c.Translations.GetValueOrDefault(language, 
+                c.Translations.GetValueOrDefault(twoLetterCode,
+                    c.Translations.GetValueOrDefault("en", c.Id)))
         );
     }
 } 

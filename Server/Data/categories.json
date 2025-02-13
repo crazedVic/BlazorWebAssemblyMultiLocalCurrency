@@ -5,7 +5,8 @@
       "translations": {
         "en": "Dairy",
         "fr": "Produits Laitiers",
-        "es": "Lácteos"
+        "es": "Lácteos",
+        "de": "Milchprodukte"
       }
     },
     {
@@ -13,7 +14,8 @@
       "translations": {
         "en": "Bakery",
         "fr": "Boulangerie",
-        "es": "Panadería"
+        "es": "Panadería",
+        "de": "Bäckerei"
       }
     },
     {
@@ -21,7 +23,8 @@
       "translations": {
         "en": "Produce",
         "fr": "Fruits et Légumes",
-        "es": "Frutas y Verduras"
+        "es": "Frutas y Verduras",
+        "de": "Obst und Gemüse"
       }
     },
     {
@@ -29,7 +32,8 @@
       "translations": {
         "en": "Meat",
         "fr": "Viande",
-        "es": "Carne"
+        "es": "Carne",
+        "de": "Fleisch"
       }
     },
     {
@@ -37,7 +41,8 @@
       "translations": {
         "en": "Grains",
         "fr": "Céréales",
-        "es": "Granos"
+        "es": "Granos",
+        "de": "Getreide"
       }
     },
     {
@@ -45,7 +50,8 @@
       "translations": {
         "en": "Beverages",
         "fr": "Boissons",
-        "es": "Bebidas"
+        "es": "Bebidas",
+        "de": "Getränke"
       }
     },
     {
@@ -53,7 +59,8 @@
       "translations": {
         "en": "Breakfast",
         "fr": "Petit-déjeuner",
-        "es": "Desayuno"
+        "es": "Desayuno",
+        "de": "Frühstück"
       }
     },
     {
@@ -61,7 +68,8 @@
       "translations": {
         "en": "Seafood",
         "fr": "Fruits de Mer",
-        "es": "Mariscos"
+        "es": "Mariscos",
+        "de": "Meeresfrüchte"
       }
     },
     {
@@ -69,7 +77,8 @@
       "translations": {
         "en": "Snacks",
         "fr": "Snacks",
-        "es": "Snacks"
+        "es": "Snacks",
+        "de": "Snacks"
       }
     },
     {
@@ -77,7 +86,8 @@
       "translations": {
         "en": "Frozen",
         "fr": "Surgelés",
-        "es": "Congelados"
+        "es": "Congelados",
+        "de": "Tiefkühlkost"
       }
     }
   ]

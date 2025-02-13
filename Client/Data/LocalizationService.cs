@@ -9,7 +9,8 @@ public class LocalizationService : ILocalizationService
     {
         ["en"] = new Dictionary<string, LocalizedProduct>(),
         ["fr"] = new Dictionary<string, LocalizedProduct>(),
-        ["es"] = new Dictionary<string, LocalizedProduct>()
+        ["es"] = new Dictionary<string, LocalizedProduct>(),
+        ["de"] = new Dictionary<string, LocalizedProduct>()
     };
 
     public event Action? LanguageChanged;
@@ -20,7 +21,8 @@ public class LocalizationService : ILocalizationService
     {
         ("en", "English"),
         ("fr", "Français"),
-        ("es", "Español")
+        ("es", "Español"),
+        ("de", "Deutsch")
     };
 
     public Task SetLanguage(string languageCode)

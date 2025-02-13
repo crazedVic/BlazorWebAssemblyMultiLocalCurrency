@@ -21,16 +21,26 @@ public class CategoriesController : ControllerBase
         try
         {
             var categoryIds = await _categoryService.GetAllCategoryIds();
-            var translations = await _categoryService.GetAllCategoryTranslations("en");
-            
-            var categories = categoryIds.Select(id => new CategoryTranslationItem
+            var categories = new List<CategoryTranslationItem>();
+
+            foreach (var id in categoryIds)
             {
-                Id = id,
-                Translations = new Dictionary<string, string>
+                var translations = new Dictionary<string, string>();
+                foreach (var lang in new[] { "en", "es", "fr", "de" })
                 {
-                    ["en"] = translations.GetValueOrDefault(id, string.Empty)
+                    var translation = await _categoryService.GetCategoryTranslation(id, lang);
+                    if (!string.IsNullOrEmpty(translation))
+                    {
+                        translations[lang] = translation;
+                    }
                 }
-            }).ToList();
+
+                categories.Add(new CategoryTranslationItem
+                {
+                    Id = id,
+                    Translations = translations
+                });
+            }
 
             return Ok(new CategoryTranslations { Categories = categories });
         }

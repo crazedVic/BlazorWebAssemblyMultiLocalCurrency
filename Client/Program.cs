@@ -29,6 +29,7 @@ var supportedCultures = new[]
     new CultureInfo("en-US"),
     new CultureInfo("es-ES"),
     new CultureInfo("fr-FR"),
+    new CultureInfo("de-DE")
 };
 
 CultureInfo.DefaultThreadCurrentCulture = supportedCultures[0];
