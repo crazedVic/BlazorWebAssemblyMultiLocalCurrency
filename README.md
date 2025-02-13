@@ -1,12 +1,12 @@
-# Blazor WebAssembly Curosr AI Composer Demo
+# Blazor WebAssembly Cursor AI Composer Demo
 
 ![Blazor Hello World Demo Screenshot](docs/screen.png)
 
-A modern e-commerce demonstration application built with Blazor WebAssembly, showcasing various features and best practices in .NET development.
+A modern e-commerce demonstration application built with [Blazor WebAssembly](https://learn.microsoft.com/en-us/aspnet/core/blazor/), showcasing various features and best practices in .NET development.
 
 ## Project Creation
 
-This entire solution was architected and implemented by Claude 3.5 Sonnet LLM using the Cursor AI Composer, demonstrating the capabilities of AI-assisted software development. Every aspect of the application - from architecture decisions to code implementation - was generated through AI pair programming.
+This entire solution was architected and implemented by [Claude 3.5 Sonnet](https://www.anthropic.com/claude) LLM using the [Cursor AI](https://cursor.sh/) Composer, demonstrating the capabilities of AI-assisted software development. Every aspect of the application - from architecture decisions to code implementation - was generated through AI pair programming.
 
 ## Features
 
@@ -17,11 +17,11 @@ This entire solution was architected and implemented by Claude 3.5 Sonnet LLM us
 
 ## Technical Stack
 
-- **.NET 9 Preview**
-- **Blazor WebAssembly** for the client-side application
-- **ASP.NET Core** for the backend API
-- **Entity Framework Core** for data access
-- **RESTful API** architecture
+- **[.NET 9 Preview](https://learn.microsoft.com/en-us/dotnet/core/whats-new/dotnet-9)**
+- **[Blazor WebAssembly](https://learn.microsoft.com/en-us/aspnet/core/blazor/?view=aspnetcore-9.0#blazor-webassembly)** for the client-side application
+- **[ASP.NET Core](https://learn.microsoft.com/en-us/aspnet/core/introduction-to-aspnet-core)** for the backend API
+- **[Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/)** for data access
+- **[RESTful API](https://learn.microsoft.com/en-us/azure/architecture/best-practices/api-design)** architecture
 
 ## Third-Party Libraries & Frameworks
 
@@ -32,9 +32,9 @@ This entire solution was architected and implemented by Claude 3.5 Sonnet LLM us
 - **[Google Fonts - Roboto](https://fonts.google.com/specimen/Roboto)**: Roboto font family for consistent typography
 
 ### Core Dependencies
-- **Microsoft.AspNetCore.Components.WebAssembly (v9.0.0-preview.1.24081.5)**: Core Blazor WebAssembly framework
-- **Microsoft.Extensions.Localization (v9.0.1)**: Localization support for multi-language features
-- **Microsoft.AspNetCore.OpenApi (v9.0.0)**: OpenAPI (Swagger) support for API documentation
+- **[Microsoft.AspNetCore.Components.WebAssembly](https://learn.microsoft.com/en-us/aspnet/core/blazor/hosting-models#blazor-webassembly) (v9.0.0-preview.1.24081.5)**: Core Blazor WebAssembly framework
+- **[Microsoft.Extensions.Localization](https://learn.microsoft.com/en-us/aspnet/core/fundamentals/localization) (v9.0.1)**: Localization support for multi-language features
+- **[Microsoft.AspNetCore.OpenApi](https://learn.microsoft.com/en-us/aspnet/core/tutorials/web-api-help-pages-using-swagger) (v9.0.0)**: OpenAPI (Swagger) support for API documentation
 
 ## Project Structure
 
