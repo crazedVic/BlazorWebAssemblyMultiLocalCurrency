@@ -18,6 +18,10 @@
         "es": {
           "name": "Leche",
           "unit": "litros"
+        },
+        "de": {
+          "name": "Milch",
+          "unit": "Liter"
         }
       }
     },
@@ -39,6 +43,10 @@
         "es": {
           "name": "Pan",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Brot",
+          "unit": "Stück"
         }
       }
     },
@@ -60,6 +68,10 @@
         "es": {
           "name": "Huevos",
           "unit": "docena"
+        },
+        "de": {
+          "name": "Eier",
+          "unit": "Dutzend"
         }
       }
     },
@@ -80,6 +92,10 @@
         },
         "es": {
           "name": "Plátanos",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Bananen",
           "unit": "kg"
         }
       }
@@ -102,6 +118,10 @@
         "es": {
           "name": "Pechuga de Pollo",
           "unit": "kg"
+        },
+        "de": {
+          "name": "Hähnchenbrust",
+          "unit": "kg"
         }
       }
     },
@@ -122,6 +142,10 @@
         },
         "es": {
           "name": "Arroz",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Reis",
           "unit": "kg"
         }
       }
@@ -144,6 +168,10 @@
         "es": {
           "name": "Tomates",
           "unit": "kg"
+        },
+        "de": {
+          "name": "Tomaten",
+          "unit": "kg"
         }
       }
     },
@@ -164,6 +192,10 @@
         },
         "es": {
           "name": "Queso",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Käse",
           "unit": "kg"
         }
       }
@@ -186,6 +218,10 @@
         "es": {
           "name": "Pasta",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Nudeln",
+          "unit": "Stück"
         }
       }
     },
@@ -207,6 +243,10 @@
         "es": {
           "name": "Jugo de Naranja",
           "unit": "litros"
+        },
+        "de": {
+          "name": "Orangensaft",
+          "unit": "Liter"
         }
       }
     },
@@ -219,6 +259,10 @@
       "translations": {
         "en": {
           "name": "Carrots",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Karotten",
           "unit": "kg"
         }
       }
@@ -241,6 +285,10 @@
         "es": {
           "name": "Carne Molida",
           "unit": "kg"
+        },
+        "de": {
+          "name": "Hackfleisch",
+          "unit": "kg"
         }
       }
     },
@@ -262,6 +310,10 @@
         "es": {
           "name": "Yogur",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Joghurt",
+          "unit": "Stück"
         }
       }
     },
@@ -282,6 +334,10 @@
         },
         "es": {
           "name": "Manzanas",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Äpfel",
           "unit": "kg"
         }
       }
@@ -304,6 +360,10 @@
         "es": {
           "name": "Café",
           "unit": "kg"
+        },
+        "de": {
+          "name": "Kaffee",
+          "unit": "kg"
         }
       }
     },
@@ -325,6 +385,10 @@
         "es": {
           "name": "Cereal",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Müsli",
+          "unit": "Stück"
         }
       }
     },
@@ -345,6 +409,10 @@
         },
         "es": {
           "name": "Salmón",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Lachs",
           "unit": "kg"
         }
       }
@@ -367,6 +435,10 @@
         "es": {
           "name": "Papas Fritas",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Kartoffelchips",
+          "unit": "Stück"
         }
       }
     },
@@ -387,6 +459,10 @@
         },
         "es": {
           "name": "Cebollas",
+          "unit": "kg"
+        },
+        "de": {
+          "name": "Zwiebeln",
           "unit": "kg"
         }
       }
@@ -409,6 +485,10 @@
         "es": {
           "name": "Helado",
           "unit": "piezas"
+        },
+        "de": {
+          "name": "Eiscreme",
+          "unit": "Stück"
         }
       }
     }
