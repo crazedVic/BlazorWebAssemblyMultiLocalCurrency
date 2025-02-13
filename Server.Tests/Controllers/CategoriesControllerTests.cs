@@ -23,16 +23,28 @@ public class CategoriesControllerTests
     {
         // Arrange
         var categoryIds = new List<string> { "electronics", "books" };
-        var translations = new Dictionary<string, string>
-        {
-            ["electronics"] = "Electronics",
-            ["books"] = "Books"
-        };
 
         _mockCategoryService.Setup(s => s.GetAllCategoryIds())
             .ReturnsAsync(categoryIds);
-        _mockCategoryService.Setup(s => s.GetAllCategoryTranslations("en"))
-            .ReturnsAsync(translations);
+
+        // Setup translations for each language
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("electronics", "en"))
+            .ReturnsAsync("Electronics");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("electronics", "es"))
+            .ReturnsAsync("Electrónicos");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("electronics", "fr"))
+            .ReturnsAsync("Électronique");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("electronics", "de"))
+            .ReturnsAsync("Elektronik");
+
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("books", "en"))
+            .ReturnsAsync("Books");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("books", "es"))
+            .ReturnsAsync("Libros");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("books", "fr"))
+            .ReturnsAsync("Livres");
+        _mockCategoryService.Setup(s => s.GetCategoryTranslation("books", "de"))
+            .ReturnsAsync("Bücher");
 
         var expectedCategories = new CategoryTranslations
         {
@@ -43,7 +55,10 @@ public class CategoriesControllerTests
                     Id = "electronics",
                     Translations = new Dictionary<string, string>
                     {
-                        ["en"] = "Electronics"
+                        ["en"] = "Electronics",
+                        ["es"] = "Electrónicos",
+                        ["fr"] = "Électronique",
+                        ["de"] = "Elektronik"
                     }
                 },
                 new()
@@ -51,7 +66,10 @@ public class CategoriesControllerTests
                     Id = "books",
                     Translations = new Dictionary<string, string>
                     {
-                        ["en"] = "Books"
+                        ["en"] = "Books",
+                        ["es"] = "Libros",
+                        ["fr"] = "Livres",
+                        ["de"] = "Bücher"
                     }
                 }
             }
@@ -75,12 +93,9 @@ public class CategoriesControllerTests
     {
         // Arrange
         var categoryIds = new List<string>();
-        var translations = new Dictionary<string, string>();
 
         _mockCategoryService.Setup(s => s.GetAllCategoryIds())
             .ReturnsAsync(categoryIds);
-        _mockCategoryService.Setup(s => s.GetAllCategoryTranslations("en"))
-            .ReturnsAsync(translations);
 
         // Act
         var result = await _controller.GetCategories();

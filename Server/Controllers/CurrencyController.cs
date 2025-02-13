@@ -30,7 +30,7 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpGet("convert")]
-    public async Task<ActionResult<decimal>> ConvertPrice([FromQuery] string price, [FromQuery] string fromCurrency, [FromQuery] string toCurrency)
+    public async Task<ActionResult<decimal>> ConvertPrice([FromQuery] string price, [FromQuery] string? fromCurrency, [FromQuery] string? toCurrency)
     {
         try
         {
@@ -64,7 +64,7 @@ public class CurrencyController : ControllerBase
     }
 
     [HttpGet("format")]
-    public async Task<ActionResult<string>> FormatPrice([FromQuery] string price, [FromQuery] string currency)
+    public async Task<ActionResult<string>> FormatPrice([FromQuery] string price, [FromQuery] string? currency)
     {
         try
         {

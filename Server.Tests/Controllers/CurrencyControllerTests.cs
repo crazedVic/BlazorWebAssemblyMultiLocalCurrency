@@ -138,7 +138,7 @@ public class CurrencyControllerTests
     [InlineData("10.50", null, "EUR")]
     [InlineData("10.50", "USD", null)]
     public async Task ConvertPrice_WithMissingCurrencyCodes_ReturnsBadRequest(
-        string price, string fromCurrency, string toCurrency)
+        string price, string? fromCurrency, string? toCurrency)
     {
         // Act
         var result = await _controller.ConvertPrice(price, fromCurrency, toCurrency);
@@ -246,7 +246,7 @@ public class CurrencyControllerTests
     [InlineData("", "USD")]
     [InlineData("10.50", "")]
     [InlineData("10.50", null)]
-    public async Task FormatPrice_WithMissingCurrency_ReturnsBadRequest(string price, string currency)
+    public async Task FormatPrice_WithMissingCurrency_ReturnsBadRequest(string price, string? currency)
     {
         // Act
         var result = await _controller.FormatPrice(price, currency);
