@@ -1,114 +1,42 @@
-using System.Collections.Concurrent;
+using System.Text.Json;
 using BlazorHelloWorld.Shared.Models;
+using BlazorHelloWorld.Shared.Services;
 
 namespace BlazorHelloWorld.Server.Services;
 
-public class CurrencyService : ICurrencyService
+public class CurrencyService : BaseCurrencyService
 {
-    private readonly Dictionary<string, CurrencyInfo> _currencies = new()
-    {
-        {
-            "USD", new CurrencyInfo
-            {
-                Code = "USD",
-                Name = "US Dollar",
-                Symbol = "$",
-                FlagCode = "us",
-                ExchangeRate = 1.0m
-            }
-        },
-        {
-            "EUR", new CurrencyInfo
-            {
-                Code = "EUR",
-                Name = "Euro",
-                Symbol = "€",
-                FlagCode = "eu",
-                ExchangeRate = 0.92m
-            }
-        },
-        {
-            "AUD", new CurrencyInfo
-            {
-                Code = "AUD",
-                Name = "Australian Dollar",
-                Symbol = "A$",
-                FlagCode = "au",
-                ExchangeRate = 1.53m
-            }
-        },
-        {
-            "GBP", new CurrencyInfo
-            {
-                Code = "GBP",
-                Name = "British Pound",
-                Symbol = "£",
-                FlagCode = "gb",
-                ExchangeRate = 0.79m
-            }
-        },
-        {
-            "INR", new CurrencyInfo
-            {
-                Code = "INR",
-                Name = "Indian Rupee",
-                Symbol = "₹",
-                FlagCode = "in",
-                ExchangeRate = 83.12m
-            }
-        },
-        {
-            "CAD", new CurrencyInfo
-            {
-                Code = "CAD",
-                Name = "Canadian Dollar",
-                Symbol = "C$",
-                FlagCode = "ca",
-                ExchangeRate = 1.35m
-            }
-        }
-    };
+    private readonly string _dataPath;
 
-    private string _currentCurrency = "USD";
-    public event Action? CurrencyChanged;
-    public string CurrentCurrency => _currentCurrency;
-
-    public async Task<List<CurrencyInfo>> GetAvailableCurrencies()
+    public CurrencyService(IWebHostEnvironment webHostEnvironment)
     {
-        return await Task.FromResult(_currencies.Values.ToList());
+        _dataPath = Path.Combine(webHostEnvironment.ContentRootPath, "Data", "currencies.json");
     }
 
-    public async Task SetCurrentCurrency(string currency)
+    protected override async Task LoadCurrencies()
     {
-        if (_currentCurrency != currency)
+        if (Currencies.Count > 0) return;
+
+        if (!File.Exists(_dataPath))
         {
-            _currentCurrency = currency;
-            CurrencyChanged?.Invoke();
+            Currencies = new Dictionary<string, CurrencyInfo>();
+            return;
         }
-        await Task.CompletedTask;
+
+        var jsonString = await File.ReadAllTextAsync(_dataPath);
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true
+        };
+        var currencies = JsonSerializer.Deserialize<List<CurrencyInfo>>(jsonString, options)
+            ?? throw new InvalidOperationException("Failed to deserialize currencies.json");
+        
+        Currencies = currencies.ToDictionary(c => c.Code);
     }
 
-    public async Task<decimal> ConvertPrice(decimal price, string fromCurrency, string toCurrency)
+    protected override Task SaveCurrentCurrency(string currency)
     {
-        if (!_currencies.ContainsKey(fromCurrency) || !_currencies.ContainsKey(toCurrency))
-        {
-            return await Task.FromResult(price);
-        }
-
-        var fromRate = _currencies[fromCurrency].ExchangeRate;
-        var toRate = _currencies[toCurrency].ExchangeRate;
-
-        return await Task.FromResult(price * (toRate / fromRate));
-    }
-
-    public async Task<string> FormatPrice(decimal price, string currency)
-    {
-        if (!_currencies.ContainsKey(currency))
-        {
-            return await Task.FromResult($"{price:N2}");
-        }
-
-        var info = _currencies[currency];
-        return await Task.FromResult($"{info.Symbol}{price:N2}");
+        // Server doesn't need to save the current currency as it's client-specific
+        return Task.CompletedTask;
     }
 } 

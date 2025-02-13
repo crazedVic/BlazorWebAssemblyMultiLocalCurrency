@@ -2,7 +2,7 @@ using System.Net.Http.Json;
 using BlazorHelloWorld.Shared.Models;
 using BlazorHelloWorld.Shared.Services;
 
-namespace BlazorHelloWorld.Client.Data;
+namespace BlazorHelloWorld.Client.Services;
 
 public class CategoryService : BaseCategoryService
 {
@@ -20,4 +20,4 @@ public class CategoryService : BaseCategoryService
         CategoryTranslations = await _httpClient.GetFromJsonAsync<CategoryTranslations>("/api/categories")
             ?? throw new InvalidOperationException("Failed to load categories.json");
     }
-}
+} 

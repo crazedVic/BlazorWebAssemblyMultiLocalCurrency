@@ -1,0 +1,44 @@
+[
+    {
+        "code": "USD",
+        "name": "US Dollar",
+        "symbol": "$",
+        "flagCode": "us",
+        "exchangeRate": 1.0
+    },
+    {
+        "code": "EUR",
+        "name": "Euro",
+        "symbol": "€",
+        "flagCode": "eu",
+        "exchangeRate": 0.92
+    },
+    {
+        "code": "AUD",
+        "name": "Australian Dollar",
+        "symbol": "A$",
+        "flagCode": "au",
+        "exchangeRate": 1.53
+    },
+    {
+        "code": "GBP",
+        "name": "British Pound",
+        "symbol": "£",
+        "flagCode": "gb",
+        "exchangeRate": 0.79
+    },
+    {
+        "code": "INR",
+        "name": "Indian Rupee",
+        "symbol": "₹",
+        "flagCode": "in",
+        "exchangeRate": 83.12
+    },
+    {
+        "code": "CAD",
+        "name": "Canadian Dollar",
+        "symbol": "C$",
+        "flagCode": "ca",
+        "exchangeRate": 1.35
+    }
+] 

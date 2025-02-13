@@ -1,11 +1,8 @@
-@using BlazorHelloWorld.Shared.Models
-@using BlazorHelloWorld.Shared.Services
 @using MudBlazor
 @inject ICurrencyService CurrencyService
-@implements IDisposable
-@using Microsoft.Extensions.Localization
 @inject ILocalizationService LocalizationService
 @inject IStringLocalizer<App> Localizer
+@implements IDisposable
 
 <div class="d-flex align-items-center me-3">
     <MudSelect T="string" 
