@@ -96,6 +96,11 @@ The application follows a clean architecture pattern with:
 - Added localization support for weather condition summaries
 - Weather descriptions available in multiple languages (English, Spanish, French)
 - Culture-aware date formatting
+- Enhanced temperature display:
+  - Negative temperatures highlighted in red
+  - Right-aligned temperature columns with units (°C and °F)
+  - Optimized column layout with visual spacing
+  - Temperature units displayed next to values
 
 #### Counter Page
 - Added localization for button text and counter display
