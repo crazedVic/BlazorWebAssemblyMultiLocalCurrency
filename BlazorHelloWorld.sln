@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Server", "Server\Server.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{A8B8C0C0-0000-0000-0000-000000000000}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared.Tests", "Shared.Tests\Shared.Tests.csproj", "{E5A37DF2-A903-4806-AF20-8AF7406F1E2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,5 +31,9 @@ Global
 		{A8B8C0C0-0000-0000-0000-000000000000}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8B8C0C0-0000-0000-0000-000000000000}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8B8C0C0-0000-0000-0000-000000000000}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A37DF2-A903-4806-AF20-8AF7406F1E2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A37DF2-A903-4806-AF20-8AF7406F1E2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A37DF2-A903-4806-AF20-8AF7406F1E2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A37DF2-A903-4806-AF20-8AF7406F1E2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
