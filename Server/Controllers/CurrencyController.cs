@@ -19,7 +19,14 @@ public class CurrencyController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<List<CurrencyInfo>>> GetAvailableCurrencies()
     {
-        return Ok(await _currencyService.GetAvailableCurrencies());
+        try
+        {
+            return Ok(await _currencyService.GetAvailableCurrencies());
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "An error occurred while retrieving currencies");
+        }
     }
 
     [HttpGet("convert")]
@@ -27,6 +34,16 @@ public class CurrencyController : ControllerBase
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(fromCurrency) || string.IsNullOrWhiteSpace(toCurrency))
+            {
+                return BadRequest("Currency codes cannot be empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(price))
+            {
+                return BadRequest("Currency codes cannot be empty");
+            }
+
             // Parse the price using invariant culture to ensure consistent decimal handling
             if (!decimal.TryParse(price, NumberStyles.Number | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal parsedPrice))
             {
@@ -40,6 +57,10 @@ public class CurrencyController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+        catch (Exception)
+        {
+            return StatusCode(500, "An error occurred while converting the price");
+        }
     }
 
     [HttpGet("format")]
@@ -47,6 +68,16 @@ public class CurrencyController : ControllerBase
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(currency))
+            {
+                return BadRequest("Currency code cannot be empty");
+            }
+
+            if (string.IsNullOrWhiteSpace(price))
+            {
+                return BadRequest("Currency code cannot be empty");
+            }
+
             // Parse the price using invariant culture to ensure consistent decimal handling
             if (!decimal.TryParse(price, NumberStyles.Number | NumberStyles.AllowDecimalPoint, CultureInfo.InvariantCulture, out decimal parsedPrice))
             {
@@ -59,6 +90,10 @@ public class CurrencyController : ControllerBase
         catch (ArgumentException ex)
         {
             return BadRequest(ex.Message);
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "An error occurred while formatting the price");
         }
     }
 } 

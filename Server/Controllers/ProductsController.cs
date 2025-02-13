@@ -18,7 +18,14 @@ public class ProductsController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<ProductTranslations>> GetProducts()
     {
-        var products = await _productService.GetProducts();
-        return Ok(products);
+        try
+        {
+            var products = await _productService.GetProducts();
+            return Ok(products);
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "An error occurred while retrieving products");
+        }
     }
 } 

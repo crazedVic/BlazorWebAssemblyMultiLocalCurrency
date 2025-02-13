@@ -18,18 +18,25 @@ public class CategoriesController : ControllerBase
     [HttpGet]
     public async Task<ActionResult<CategoryTranslations>> GetCategories()
     {
-        var categoryIds = await _categoryService.GetAllCategoryIds();
-        var translations = await _categoryService.GetAllCategoryTranslations("en");
-        
-        var categories = categoryIds.Select(id => new CategoryTranslationItem
+        try
         {
-            Id = id,
-            Translations = new Dictionary<string, string>
+            var categoryIds = await _categoryService.GetAllCategoryIds();
+            var translations = await _categoryService.GetAllCategoryTranslations("en");
+            
+            var categories = categoryIds.Select(id => new CategoryTranslationItem
             {
-                ["en"] = translations[id]
-            }
-        }).ToList();
+                Id = id,
+                Translations = new Dictionary<string, string>
+                {
+                    ["en"] = translations.GetValueOrDefault(id, string.Empty)
+                }
+            }).ToList();
 
-        return Ok(new CategoryTranslations { Categories = categories });
+            return Ok(new CategoryTranslations { Categories = categories });
+        }
+        catch (Exception)
+        {
+            return StatusCode(500, "An error occurred while retrieving categories");
+        }
     }
 } 
