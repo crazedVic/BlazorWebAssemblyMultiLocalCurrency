@@ -1,4 +1,4 @@
-# Blazor WebAssembly Curosr AI Composer Demo
+# Blazor WebAssembly Cursor AI Composer Demo
 
 ![Blazor Hello World Demo Screenshot](docs/screen.png)
 
