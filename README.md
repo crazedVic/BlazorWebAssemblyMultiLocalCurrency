@@ -1,5 +1,7 @@
 # Blazor WebAssembly Curosr AI Composer Demo
 
+![Blazor Hello World Demo Screenshot](docs/screen.png)
+
 A modern e-commerce demonstration application built with Blazor WebAssembly, showcasing various features and best practices in .NET development.
 
 ## Project Creation
