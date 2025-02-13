@@ -74,6 +74,18 @@
     <value>Resumen</value>
   </data>
   <data name="Weather data demo" xml:space="preserve">
-    <value>Este componente demuestra la obtención de datos desde el servidor.</value>
+    <value>Este componente demuestra la obtención de datos del servidor.</value>
+  </data>
+  <data name="Freezing" xml:space="preserve">
+    <value>Helado</value>
+  </data>
+  <data name="Bracing" xml:space="preserve">
+    <value>Vigorizante</value>
+  </data>
+  <data name="Balmy" xml:space="preserve">
+    <value>Templado</value>
+  </data>
+  <data name="Chilly" xml:space="preserve">
+    <value>Fresco</value>
   </data>
 </root> 
