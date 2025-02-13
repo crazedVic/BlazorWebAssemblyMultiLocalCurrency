@@ -8,7 +8,36 @@
 @inject ILocalizationService LocalizationService
 @inject ICategoryService CategoryService
 @inject IStringLocalizer<App> Localizer
+@inject IJSRuntime JSRuntime
 @implements IDisposable
+
+<style>
+    [class^="price-change-"] {
+        animation: price-flash 0.5s ease-in-out;
+    }
+
+    @@keyframes price-flash {
+        0% {
+            font-weight: bold;
+            font-size: calc(1em + 0.2pt);
+            color: #0d6efd;
+        }
+        100% {
+            font-weight: normal;
+            font-size: 1em;
+            color: inherit;
+        }
+    }
+
+    .price {
+        font-weight: normal;
+        font-size: 1em;
+    }
+
+    .price.animate {
+        animation: price-flash 0.5s ease-in-out;
+    }
+</style>
 
 <PageTitle>@Localizer["Products"]</PageTitle>
 
@@ -56,7 +85,7 @@
                     <td>
                         @if (_localPrices.TryGetValue(product.Id, out var localPrice))
                         {
-                            @localPrice
+                            <span class="price" id="@($"price-{product.Id}")">@localPrice</span>
                         }
                         else
                         {
@@ -137,5 +166,26 @@
     {
         await LoadPrices();
         StateHasChanged();
+        await Task.Delay(50);
+        foreach (var product in _products)
+        {
+            await JSRuntime.InvokeVoidAsync("animatePrice", $"price-{product.Id}");
+        }
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("eval", @"
+                window.animatePrice = function(id) {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.classList.add('animate');
+                        setTimeout(() => el.classList.remove('animate'), 500);
+                    }
+                }
+            ");
+        }
     }
 } 
