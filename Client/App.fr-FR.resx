@@ -41,7 +41,7 @@
     <value>Météo</value>
   </data>
   <data name="Hello World" xml:space="preserve">
-    <value>Bonjour le Monde</value>
+    <value>Bonjour le monde</value>
   </data>
   <data name="Navigation menu" xml:space="preserve">
     <value>Menu de navigation</value>
@@ -53,7 +53,7 @@
     <value>Langue</value>
   </data>
   <data name="Current count" xml:space="preserve">
-    <value>Compteur actuel</value>
+    <value>Compte actuel</value>
   </data>
   <data name="Click me" xml:space="preserve">
     <value>Cliquez ici</value>
@@ -80,12 +80,12 @@
     <value>Glacial</value>
   </data>
   <data name="Bracing" xml:space="preserve">
-    <value>Vivifiant</value>
+    <value>Tonifiant</value>
   </data>
   <data name="Balmy" xml:space="preserve">
     <value>Doux</value>
   </data>
   <data name="Chilly" xml:space="preserve">
-    <value>Frisquet</value>
+    <value>Frais</value>
   </data>
 </root> 
