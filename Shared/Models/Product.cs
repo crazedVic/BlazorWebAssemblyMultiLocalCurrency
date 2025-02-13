@@ -94,7 +94,7 @@ public class Product
         }
 
         var translation = _localizationService.GetTranslation(Id, language);
-        if (translation?.Name is null)
+        if (string.IsNullOrWhiteSpace(translation?.Name))
         {
             return Name;
         }
@@ -110,7 +110,7 @@ public class Product
         }
 
         var translation = _localizationService.GetTranslation(Id, language);
-        if (translation?.Unit is null)
+        if (string.IsNullOrWhiteSpace(translation?.Unit))
         {
             return Unit;
         }
